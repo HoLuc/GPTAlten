@@ -7,4 +7,13 @@ Bienvenue sur le Projet GPTAlten: Projet ayant pour but d'implémenter ChatGPT d
 
 ## Requirements
 
+À la base du projet,  
+
+
+```sh
+cd src
+python manage.py migrate
+python manage.py runserver
+  ```
+
 ## About
