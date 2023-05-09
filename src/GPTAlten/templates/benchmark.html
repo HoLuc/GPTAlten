@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_home.css' %}">
+    <title>GPTAlten - Benchmark</title>
+</head>
+
+<body>
+    <!-- Barre D'Accueil -->
+    <nav>
+        <ul class="nav-list">
+            <li class="nav-item"><a href="../homepage/">Accueil</a></li>
+            <li class="nav-item"><a href="../chatbot/">Chatbot</a></li>
+            <li class="nav-item"><a href="../synth/">Synthétiseur</a></li>
+            <li class="nav-item"><a href="../benchmark/">Benchmark</a></li>
+            <li class="nav-item"><a href="../tutoriel/">Tutoriel</a></li>
+            <li class="nav-item"><a href="https://www.alten.fr/"> <img src={% static "altenlogo.png" %}> </a></li>
+        </ul>
+    </nav>
+    <br><br>
+    1 - Sélectionner votre tâche :
+    <select name="model" id="model">
+        <option value="Classification">Classification</option>
+        <option value="Synth">Synthèse</option>
+        <option value="TraductionFA">Traduction Français -> Anglais</option>
+        <option value="TraductionAF">Traduction Anglais -> Français</option>
+
+    </select>
+    <br><br>
+    2 - Télécharger vos données test:
+    <input type="file" id="avatar" name="avatar">
+    <br><br>
+    3 - Sélectionner votre modèle:
+    <br>
+    <input type="checkbox" id="GPT-2" name="GPT-2" checked>
+    <label for="GPT-2">GPT-2</label>
+    <input type="checkbox" id="GPT-3" name="GPT-3">
+    <label for="GPT-3">GPT-3</label>
+    <input type="checkbox" id="BERT" name="BERT">
+    <label for="BERT">BERT</label>
+    <input type="checkbox" id="RoBERTa" name="RoBERTa">
+    <label for="RoBERTa">RoBERTa</label>
+    <input type="checkbox" id="Pegasus" name="Pegasus">
+    <label for="Pegasus">Pegasus</label>
+    <br><br>
+    <p>Still in progress... - Rajouter des graphes Plotly/Dash</p>
+    <br>
+
+</body>
+
+</html>

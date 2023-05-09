@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_home.css' %}">
+    <title>GPTAlten - Accueil </title>
+</head>
+
+<body>
+    <nav>
+        <ul class="nav-list">
+            <li class="nav-item"><a href="../homepage/">Accueil</a></li>
+            <li class="nav-item"><a href="../chatbot/">Chatbot</a></li>
+            <li class="nav-item"><a href="../synth/">Synthétiseur</a></li>
+            <li class="nav-item"><a href="../benchmark/">Benchmark</a></li>
+            <li class="nav-item"><a href="../tutoriel/">Tutoriel</a></li>
+            <li class="nav-item"><a href="https://www.alten.fr/"> <img src={% static "altenlogo.png" %}> </a></li>
+        </ul>
+    </nav>
+    <!-- <center>
+        <p class="p" style="color: black;">Powered by <img style='vertical-align:middle;' src={%
+                static "openai_logo.png" %}> and <img style='vertical-align:middle;' src={% static "hf-logo.png" %}></p>
+    </center> -->
+</body>
+
+</html>

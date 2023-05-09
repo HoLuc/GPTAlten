@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_home.css' %}">
+    <title>GPTAlten - Chatbot</title>
+</head>
+
+<body>
+    <!-- Barre D'Accueil -->
+    <nav>
+        <ul class="nav-list">
+            <li class="nav-item"><a href="../homepage/">Accueil</a></li>
+            <li class="nav-item"><a href="../chatbot/">Chatbot</a></li>
+            <li class="nav-item"><a href="../synth/">Synthétiseur</a></li>
+            <li class="nav-item"><a href="../benchmark/">Benchmark</a></li>
+            <li class="nav-item"><a href="../tutoriel/">Tutoriel</a></li>
+            <li class="nav-item"><a href="https://www.alten.fr/"> <img src={% static "altenlogo.png" %}> </a></li>
+        </ul>
+    </nav>
+
+    <!-- Select Model -->
+    <p style="color: black;">Select your model :</p>
+    <select name="model" id="model">
+        <option value="ChatGPT">ChatGPT</option>
+        <option value="GPT-NeoXT">GPT-NeoXT</option>
+        <!-- <option value="DialoGPT">DialoGPT</option> -->
+    </select>
+    <!-- Chatbot -->
+    <div id="texteAffiche" style="position: absolute; bottom: 200px; overflow-y:auto; overflow-x:clip;  
+    height:68%; width:80%;  left: 50%; transform: translateX(-50%); border:1px solid rgb(0, 0, 0);  
+    display: flex; flex-direction: column-reverse; font-size: 20px; word-wrap: break-word; white-space: pre-wrap;">
+    </div>
+    <div class="loader active"
+        style="position: absolute; top: 40%; left: 47%; transform: translate(-50%, -50%); display: none">
+        <div class="loader-wheel"></div>
+        <div class="loader-text"></div>
+    </div>
+    <div style="position: absolute; bottom: -200px; left: 50%; transform: translateX(-50%);" class="outer-div">
+        <form onsubmit="envoyerMessage(event)">
+            {% csrf_token %}
+            <textarea id="zoneDeTexte" placeholder="Send a message"
+                style="max-height: 200px; height: 100px; overflow-y: auto; resize: none;" name="message"
+                class="absolute" rows="20" cols="150"></textarea>
+            <button id="boutonAfficher" type="submit">Envoyer</button>
+            <p id="output"></p>
+        </form>
+    </div>
+    <!-- Script Chatbot -->
+    <script>
+        var zoneDeTexte = document.getElementById("zoneDeTexte");
+        var texteAffiche = document.getElementById("texteAffiche");
+        var boutonAfficher = document.getElementById("boutonAfficher");
+        var output = document.getElementById("output");
+
+        function afficherReponse(reponse, model) {
+            var nouvelElement = document.createElement("a");
+            nouvelElement.innerHTML = "<strong>" + model + "</strong>" + " : " + reponse;
+            nouvelElement.style.marginBottom = "20px";
+            texteAffiche.insertBefore(nouvelElement, texteAffiche.firstChild);
+            zoneDeTexte.value = "";
+        }
+
+        function envoyerMessage(event) {
+            event.preventDefault();
+            var texte = zoneDeTexte.value.trim();
+            var model = document.getElementById("model").value;
+            var loader = document.querySelector('.loader.active');
+            var nouvelElement = document.createElement("a");
+            if (texte !== "") {
+                zoneDeTexte.value = ""
+                loader.style.display = "block";
+                nouvelElement.innerHTML = "<strong>Moi</strong> : " + texte;
+                nouvelElement.style.marginBottom = "20px";
+                texteAffiche.insertBefore(nouvelElement, texteAffiche.firstChild);
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '../get_response/');
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.result) {
+                            output.innerHTML = '';
+                            loader.style.display = "none";
+                            afficherReponse(response.result, model);
+                        }
+                    } else {
+                        console.log('Erreur lors de la requête AJAX');
+                    }
+                };
+                xhr.send(encodeURI('message=' + texte + '&model=' + model));
+            }
+        }
+    </script>
+</body>
+
+</html>
