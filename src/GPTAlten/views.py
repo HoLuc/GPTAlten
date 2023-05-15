@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 import os 
+from os import path as modelpath
 import openai
 from pathlib import Path
 from django.views.decorators.csrf import csrf_exempt
@@ -16,6 +17,12 @@ openai.api_key =  open(os.path.join(BASE_DIR, 'GPTAlten/openai/openai_api_key.tx
 
 BART_path = 'GPTAlten/models/BART' 
 BART_token_path = 'GPTAlten/models/BART_token' 
+
+if modelpath.exists(BART_path) is False and modelpath.exists(BART_token_path) is False:
+    print("if marche")
+    # if model is on hugging face Hub
+    tokenizer = BartTokenizer.from_pretrained("facebook/bart-large")
+    model = BartForConditionalGeneration.from_pretrained("facebook/bart-large")
 
 def generate_openai_response(text):
         """Generate the summarized sentence made by OpenAI
