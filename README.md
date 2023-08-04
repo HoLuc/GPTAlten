@@ -1,12 +1,12 @@
 # GPTAlten
 
-## Contenu
+## Content
 
-Here is GPTAlten: a project to implement OpenAI's ChatGPT, as well as other similar models in Python for various tasks. All using Django, Javacript and XLR.
+Here is GPTAlten: a project to implement OpenAI's ChatGPT, as well as other similar models in Python for various tasks. All using Django, Javacript and XLR. 
 
 ## Requirements
 
-...
+still in progress...
 
 ## Running
 
