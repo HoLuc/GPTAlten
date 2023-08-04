@@ -2,18 +2,20 @@
 
 ## Contenu
 
-
-Bienvenue sur le Projet GPTAlten: Projet ayant pour but d'implémenter ChatGPT d'OpenAI, mais aussi d'autres modèles du même type sous Python pour différentes tâches. Le tout par l'utilisation de Django, Javacript et XLR.
+Here is GPTAlten: a project to implement OpenAI's ChatGPT, as well as other similar models in Python for various tasks. All using Django, Javacript and XLR.
 
 ## Requirements
 
-À la base du projet,  
+...
 
+## Running
+
+Located at the root of the project, write the following lines : 
 
 ```sh
 cd src
-python manage.py migrate
 python manage.py runserver
   ```
 
 ## About
+
